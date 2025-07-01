@@ -11,7 +11,7 @@ public class DeadLock {
     private int[][] asignados;
     private int[][] request; // Para la detección de interbloqueos, 'request' es lo que están esperando.
 
-    //Constructor para incializar el DeadLock
+    
     public DeadLock(int numProcesos, int numRecursos, int[]disponibles, int[][] asignados, int[][] request) {
         this.numProcesos = numProcesos;
         this.numRecursos = numRecursos;
@@ -21,6 +21,7 @@ public class DeadLock {
     }
 
     //Metodo para hacer una copia profunda de una matriz 2D
+    /* 
     private int[][] clonarMatriz(int[][] original) {
         int[][] copia = new int[original.length][];
         for (int i = 0; i < original.length; i++) {
@@ -28,8 +29,9 @@ public class DeadLock {
         }
         return copia;
     }
+    */
 
-    //Metodo para imprimir el estado actual del sistema
+    //imprimir el estado actual del sistema
     public void imprimirEstado(){
         System.out.println("\n--- Estado Actual del Sistema ---");
         System.out.println("Recursos disponibles: " + Arrays.toString(disponibles));
@@ -46,7 +48,7 @@ public class DeadLock {
         System.out.println("\n-------------------------------\n");
     }
 
-    //Algoritmo de detección de interbloqueos(Deadlock)
+    
     public boolean detectarInterbloqueo(){
         int work[] = Arrays.copyOf(disponibles, numProcesos);
         boolean finish[] = new boolean[numProcesos];
@@ -59,10 +61,10 @@ public class DeadLock {
         int procesosFinalizadosEnEstaPasada;
         do {
             procesosFinalizadosEnEstaPasada = 0;
-            boolean procesoFinalizadoEncontrado = false;
+            //boolean procesoFinalizadoEncontrado = false;
 
             for (int i = 0; i < numProcesos; i++) {
-                if (!finish[i]) {  // Si el proceso aún no ha terminado/ejecutado
+                if (!finish[i]) {  // Si el proceso aún no ha terminado
                     boolean puedeAsignar = true;
 
                     //Verificar si el proceso puede ser asignado
@@ -106,7 +108,6 @@ public class DeadLock {
         }
     }
 
-    //Recuperacion de interbloqueos
     //Terminar procesos interbloqueados hasta que se resuelva el interbloqueo
     public void recuperarInterbloqueo(){
         if(!detectarInterbloqueo()) {
@@ -121,15 +122,14 @@ public class DeadLock {
             int tempWork[] = Arrays.copyOf(disponibles, numRecursos);
             boolean tempFinish[] = new boolean[numProcesos];
 
-
-            //
+            
             int procesosTerminadosTemp;
             do{
                 procesosTerminadosTemp = 0;
                 boolean procesoFinalizadoEncontradoTemp = false;
 
                 for (int i = 0; i < numProcesos; i++) {
-                    if (!tempFinish[i]) {  // Si el proceso aún no ha terminado/ejecutado
+                    if (!tempFinish[i]) {  // Si el proceso aún no ha terminado
                         boolean puedeAsignar = true;
 
                         //Verificar si el proceso puede ser asignado
@@ -221,7 +221,7 @@ public class DeadLock {
         deadlock1.imprimirEstado();
         deadlock1.detectarInterbloqueo();   // detectar interbloqueo
         deadlock1.recuperarInterbloqueo(); // si detecta interbloqueo, recuperar y resolverlo
-      //deadlock1.imprimirEstado();  //Imprimir estado final después de recuperación
-      //deadlock1.detectarInterbloqueo();   verificar si se resolvio el interbloqueo
+        //deadlock1.imprimirEstado();  //Imprimir estado final después de recuperación
+        //deadlock1.detectarInterbloqueo();   verificar si se resolvio el interbloqueo
     }
 }

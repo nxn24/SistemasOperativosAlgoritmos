@@ -3,7 +3,7 @@ package com.informeSO.disco;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.stream.Collectors; //quitar
 
 // Clase que representa un archivo en la simulacion del disco
 class EntradaArchivo {

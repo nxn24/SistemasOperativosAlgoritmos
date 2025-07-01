@@ -1,18 +1,11 @@
 package com.informeSO.algorithms;
 
-// Import necessary classes for arrays and Scanner
+
 import java.util.Arrays;
 
-/**
- * Clase que implementa la Lógica del Banquero para la prevención de interbloqueos.
- * Gestiona la asignación de recursos a procesos y verifica la seguridad del sistema.
- */
 
 public class Banquero {
-    // Atributos de la Lógica del Banquero
-    // Número de procesos
     private int numProcesos;
-    // Número de recursos
     private int numRecursos;
     // Vector de recursos disponibles
     private int[] disponibles;
@@ -24,7 +17,6 @@ public class Banquero {
     private int[][] necesario;
 
     // Constructor de la clase
-    // Define el constructor con los parámetros necesarios para inicializar el sistema.
     public Banquero(int numProcesos, int numRecursos, int[] disponibles, int[][] maxima, int[][] asignacion) {
         this.numProcesos = numProcesos;
         this.numRecursos = numRecursos;
@@ -44,7 +36,7 @@ public class Banquero {
         calcularNecesario();
     }
 
-    // Método privado para calcular la matriz Need
+    // calcular la matriz Need
     // need[i][j] = max[i][j] - allocation[i][j]
     private void calcularNecesario() {
         for (int i = 0; i < numProcesos; i++) {
@@ -54,7 +46,7 @@ public class Banquero {
         }
     }
 
-    // Método público para imprimir el estado actual del sistema (Available, Max, Allocation, Need)
+    // imprimir el estado actual del sistema 
     public void printState() {
         // Implementación para mostrar las matrices y vectores
         System.out.println("\n--- Estado Actual del Sistema ---");
@@ -132,10 +124,7 @@ public class Banquero {
         return true; // Se encontró una secuencia segura
     }
 
-    // Algoritmo de Solicitud de Recursos: Maneja una solicitud de recursos de un proceso
-    // procesoId: ID del proceso que solicita
-    // solicitar: Vector de recursos solicitados
-    // Retorna true si la solicitud es concedida, false si es denegada o el proceso debe esperar.
+    // Algoritmo de Solicitud de Recursos
     public boolean solicitarRecursos(int procesoId, int[] request) {
         System.out.println("\n--- Solicitud de Recursos ---");
         System.out.println("Proceso P" + procesoId + " solicita: " + Arrays.toString(request));
@@ -223,18 +212,20 @@ public class Banquero {
 
         // 2. Probar solicitudes de recursos
 
-        //System.out.println("\n--- Escenario: Solicitud Segura (P1 solicita (1,0,2)) ---");
-        System.out.println("\n--- Escenario 2: Solicitud Insegura (P4 solicita (3,3,0)) ---");
+        System.out.println("\n--- Escenario 1: Solicitud Segura (P1 solicita (1,0,2)) ---");
+        //System.out.println("\n--- Escenario 2: Solicitud Insegura (P4 solicita (3,3,0)) ---");
         
         
-        //int[] solicitud1 = {1, 0, 2}; // P0 solicita 1 R0, 0 R1, 2 R2
-        int[] solicitud1 = {3, 3, 0}; // P4 solicita 3 R0, 3 R1, 0 R2
+        int[] solicitud1 = {1, 0, 2}; // P0 solicita 1 R0, 0 R1, 2 R2
+        //int[] solicitud1 = {3, 3, 0}; // P4 solicita 3 R0, 3 R1, 0 R2
 
 
-        //boolean resultado1 = banquero.solicitarRecursos(1, solicitud1);
+        boolean resultado1 = banquero.solicitarRecursos(1, solicitud1);
+        /*
         boolean resultado1 = banquero.solicitarRecursos(4, solicitud1);
         if (resultado1) {
            banquero.printState(); // Imprimir el estado después de la solicitud
         }
+        */
     }
 }
